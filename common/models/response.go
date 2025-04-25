@@ -1,4 +1,4 @@
-package model
+package models
 
 /**
  * @File: response.go

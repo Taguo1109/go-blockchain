@@ -15,7 +15,7 @@ import "time"
 type User struct {
 	ID        string    `json:"id"`
 	Email     string    `json:"email"`
-	Password  string    `json:"-"` // 不希望在 JSON 響應中返回密碼
+	Password  string    `json:"password"` // 不希望在 JSON 響應中返回密碼
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
