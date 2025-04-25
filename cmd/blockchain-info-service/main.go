@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"go-blockchain/common/middlewares"
+	"go-blockchain/internal/blockchain_info/routes"
 	"os"
 )
 
@@ -30,7 +32,10 @@ func main() {
 	}
 
 	router := gin.Default()
+	router.Use(middlewares.GlobalErrorHandler())
 
+	apiGroup := router.Group("/api")
+	routes.SetupRoutes(apiGroup) // 確保這裡傳遞了 routerGroup
 	// 在這裡添加區塊鏈資訊服務的路由和處理函數
 
 	port := os.Getenv("BLOCKCHAIN_INFO_SERVICE_PORT")
