@@ -18,4 +18,7 @@ import (
 func SetupRoutes(routerGroup *gin.RouterGroup) {
 	routerGroup.GET("/binance/price/:symbol", handlers.GetBinanceTickerPrice)
 	routerGroup.GET("/binance/prices", handlers.GetAllBinanceTickers)
+	routerGroup.GET("/binance/kLines/:symbol", handlers.GetBinanceKLines)
+	// 新增獲取兩年 K 線數據並保存的路由
+	routerGroup.GET("/binance/kLines/twoYears/:symbol", handlers.FetchTwoYearsKLinesAndSave)
 }

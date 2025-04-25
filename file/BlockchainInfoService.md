@@ -60,14 +60,21 @@
       "status_code": "200",
       "msg": "獲取 Binance 所有價格成功",
       "msg_detail": "",
-      "data": {
-        "1000CATBUSD": "0.00091113",
-        "1000CATUSDT": "0.00076660",
-        "1000CATEUR": "0.29093806",
-        "1000CATBTC": "0.00007580",
-        "1000DOGEUSDT": "0.00077000",
-        // ... 其他交易對和價格
-      }
+      "data": [
+                {
+                "symbol": "ETHBTC",
+                "price": "0.01893000"
+                },
+                {
+                "symbol": "LTCBTC",
+                "price": "0.00090000"
+                },
+                {
+                "symbol": "BNBBTC",
+                "price": "0.00647800"
+                },
+                // ... 其他交易對的價格資訊
+              ]
     }
     ```
 * **回應 (失敗 500 Internal Server Error):** 獲取 Binance 所有價格失敗，查看 `msg_detail` 獲取詳細錯誤資訊。

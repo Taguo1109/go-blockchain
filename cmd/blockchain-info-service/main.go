@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"go-blockchain/common/database"
 	"go-blockchain/common/middlewares"
 	"go-blockchain/internal/blockchain_info/routes"
 	"log"
@@ -34,6 +35,12 @@ func main() {
 
 	router := gin.Default()
 	router.Use(middlewares.GlobalErrorHandler())
+
+	// 初始化資料庫
+	_, err = database.InitDB("mysql")
+	if err != nil {
+		panic("Failed to initialize database: " + err.Error())
+	}
 
 	apiGroup := router.Group("/api")
 	routes.SetupRoutes(apiGroup) // 確保這裡傳遞了 routerGroup

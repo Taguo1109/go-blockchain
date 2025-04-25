@@ -53,6 +53,8 @@ func GenerateToken(userID string, email string) (string, error) {
 // AuthMiddleware is the JWT authentication middleware
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+
+		// 從 Header 中讀取 Authorization 欄位
 		tokenString := c.GetHeader("Authorization")
 		if tokenString == "" {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, models.JsonResult{
@@ -64,6 +66,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		//  檢查 Header 是否以 "Bearer" 開頭 且 " " 後有token
 		parts := strings.Split(tokenString, " ")
 		if !(len(parts) == 2 && parts[0] == "Bearer") {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, models.JsonResult{
@@ -75,6 +78,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		// 驗證並解析 JWT Token
 		token, err := jwt.ParseWithClaims(parts[1], &Claims{}, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("invalid signing method")
@@ -82,6 +86,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return JwtKey, nil
 		})
 
+		// 驗證失敗！
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, models.JsonResult{
 				StatusCode: "401",
