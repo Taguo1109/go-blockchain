@@ -6,6 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"go-blockchain/common/middlewares"
 	"go-blockchain/internal/blockchain_info/routes"
+	"log"
 	"os"
 )
 
@@ -43,8 +44,10 @@ func main() {
 		port = "8083" // 區塊鏈資訊服務預設使用 8083 埠
 	}
 
+	log.Printf("Blockchain Info Service listening on port :%s", port) // 添加這行日誌
+
 	if err := router.Run(":" + port); err != nil {
-		fmt.Println("Failed to run blockchain info service:", err)
+		log.Fatalf("Failed to run blockchain info service: %v", err) // 使用 log.Fatalf 輸出錯誤並退出
 	}
 
 }

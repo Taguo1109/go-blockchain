@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"log"
 	"os"
 )
 
@@ -38,7 +39,9 @@ func main() {
 		port = "8082" // 錢包服務預設使用 8082 埠
 	}
 
+	log.Printf("Wallet Service listening on port :%s", port) // 添加這行日誌
+
 	if err := router.Run(":" + port); err != nil {
-		fmt.Println("Failed to run wallet service:", err)
+		log.Fatalf("Failed to run wallet service: %v", err) // 使用 log.Fatalf 輸出錯誤並退出
 	}
 }

@@ -55,7 +55,9 @@ func main() {
 		port = "8081"
 	}
 
+	log.Printf("User Service listening on port :%s", port) // 添加這行日誌
+
 	if err := router.Run(":" + port); err != nil {
-		panic("Failed to run server: " + err.Error())
+		log.Fatalf("Failed to run user service: %v", err) // 使用 log.Fatalf 輸出錯誤並退出
 	}
 }

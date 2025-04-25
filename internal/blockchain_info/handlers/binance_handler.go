@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-blockchain/common/models"
 	"net/http"
-	"os"
 )
 
 /**
@@ -18,11 +17,11 @@ import (
  * @Version:  1.0
  */
 
-// GetAllBinanceTickers 獲取 Binance 上所有交易對的當前價格
+// GetAllBinanceTickers 獲取 Binance 上所有交易對的當前價格(市場資料不需要KEY)
 func GetAllBinanceTickers(c *gin.Context) {
 	// 幣安API KEY 登入後到帳戶(側邊欄)的API管理申請
-	apiKey := os.Getenv("BINANCE_API_KEY")
-	secretKey := os.Getenv("BINANCE_SECRET_KEY")
+	apiKey := ""
+	secretKey := ""
 
 	client := binance.NewClient(apiKey, secretKey)
 
@@ -50,11 +49,11 @@ func GetAllBinanceTickers(c *gin.Context) {
 	})
 }
 
-// GetBinanceTickerPrice 獲取指定交易對在 Binance 上的當前價格
+// GetBinanceTickerPrice 獲取指定交易對在 Binance 上的當前價格(市場資料不需要KEY)
 func GetBinanceTickerPrice(c *gin.Context) {
 	// 幣安API KEY 登入後到帳戶(側邊欄)的API管理申請
-	apiKey := os.Getenv("BINANCE_API_KEY")
-	secretKey := os.Getenv("BINANCE_SECRET_KEY")
+	apiKey := ""
+	secretKey := ""
 
 	symbol := c.Param("symbol")
 	if symbol == "" {
