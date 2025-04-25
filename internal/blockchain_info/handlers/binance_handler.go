@@ -36,16 +36,11 @@ func GetAllBinanceTickers(c *gin.Context) {
 		return
 	}
 
-	var data = make(map[string]string)
-	for _, p := range prices {
-		data[p.Symbol] = p.Price
-	}
-
 	c.JSON(http.StatusOK, models.JsonResult{
 		StatusCode: "200",
 		Msg:        "獲取 Binance 所有價格成功",
 		MsgDetail:  "",
-		Data:       data,
+		Data:       prices,
 	})
 }
 
@@ -84,10 +79,7 @@ func GetBinanceTickerPrice(c *gin.Context) {
 			StatusCode: "200",
 			Msg:        "獲取 Binance 價格成功",
 			MsgDetail:  "",
-			Data: map[string]string{
-				"symbol": prices[0].Symbol,
-				"price":  prices[0].Price,
-			},
+			Data:       prices[0],
 		})
 	} else {
 		c.JSON(http.StatusNotFound, models.JsonResult{
